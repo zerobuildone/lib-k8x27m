@@ -72,8 +72,9 @@ color:var(--muted);font-size:.76rem;text-align:center;letter-spacing:.05em;}
 <p>次の贈り物も、このLINEでお届けしますわ。ホッホッホ。<br>— メタリック芦屋マダム</p></article><a class="back" href="../index.html">← 特典ライブラリ一覧へ</a></div>
 <script>
 var T=1783677600000;
+var PV=new URLSearchParams(location.search).get('pv')==='8926';
 function tick(){
-  if(Date.now()>=T){
+  if(PV||Date.now()>=T){
     document.getElementById('locked').hidden=true;
     document.getElementById('content').hidden=false;
   }else{
