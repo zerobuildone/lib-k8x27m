@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>金・銀 売却手取りシミュレーター | マダム芦屋会</title>
+<style>
+:root{--accent:#8a6d1d;--accent-deep:#6b530f;--bg:#fbf9f2;--card:#ffffff;--text:#2e2818;
+--muted:#8a7f62;--border:#e8dfc3;--gold:#8a6d1d;--goldbg:#fdf6dc;--shadow:0 1px 4px rgba(80,60,10,.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:17px;}
+body{background:var(--bg);color:var(--text);line-height:1.85;
+font-family:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic","Meiryo",sans-serif;}
+.wrap{max-width:680px;margin:0 auto;padding:0 16px 64px;}
+header.site{text-align:center;padding:26px 0 18px;border-bottom:2px solid var(--accent);margin-bottom:8px;}
+header.site h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:1.4rem;
+color:var(--accent-deep);letter-spacing:.14em;}
+header.site p{color:var(--muted);font-size:.82rem;margin-top:4px;letter-spacing:.1em;}
+a{color:var(--accent-deep);}
+h1.tool{color:var(--accent-deep);font-size:1.35rem;margin:24px 0 6px;line-height:1.6;
+font-family:"Hiragino Mincho ProN","Yu Mincho",serif;}
+.lead{color:var(--muted);font-size:.95rem;margin:6px 0 18px;}
+h2{color:var(--accent-deep);font-size:1.1rem;margin:30px 0 12px;
+border-left:4px solid var(--accent);padding-left:12px;}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:12px;
+padding:18px;margin:12px 0;box-shadow:var(--shadow);}
+label{display:block;font-weight:bold;font-size:1rem;margin:12px 0 4px;}
+label small{font-weight:normal;color:var(--muted);}
+input[type=text]{width:100%;font-size:1.5rem;padding:12px 14px;border:2px solid var(--border);
+border-radius:10px;background:#fff;color:var(--text);}
+input[type=text]:focus{outline:none;border-color:var(--accent);}
+.btn{display:block;width:100%;font-size:1.25rem;font-weight:bold;padding:14px;margin-top:16px;
+background:var(--accent-deep);color:#fff;border:none;border-radius:12px;cursor:pointer;}
+.btn:active{background:var(--accent);}
+.seg{display:flex;gap:8px;margin:4px 0 8px;}
+.seg button{flex:1;font-size:1.1rem;padding:10px 4px;border:2px solid var(--border);
+background:var(--card);border-radius:10px;cursor:pointer;color:var(--muted);}
+.seg button.on{border-color:var(--accent-deep);background:var(--accent-deep);color:#fff;font-weight:bold;}
+.chk{display:flex;align-items:center;gap:10px;margin:12px 0 2px;font-size:.98rem;}
+.chk input{width:22px;height:22px;}
+.now{font-size:.9rem;color:var(--muted);margin-top:10px;}
+.stat{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 2px;}
+.stat div{flex:1 1 30%;min-width:140px;background:var(--card);border:1px solid var(--border);
+border-radius:10px;padding:10px 12px;text-align:center;}
+.stat .k{font-size:.8rem;color:var(--muted);}
+.stat .v{font-size:1.18rem;font-weight:bold;line-height:1.4;}
+.minus{color:#a0303a;}.plus{color:#2e6b2e;}
+.big{background:var(--goldbg);border:2px solid var(--accent);border-radius:12px;
+padding:16px 18px;margin:14px 0;box-shadow:var(--shadow);}
+.big .t{font-size:.9rem;color:var(--accent-deep);font-weight:bold;}
+.big .n{font-size:1.5rem;font-weight:bold;color:var(--accent-deep);line-height:1.6;}
+.big .s{font-size:.9rem;color:var(--muted);}
+.warn{background:#fdf0ef;border:2px solid #d9a1a0;border-radius:12px;padding:14px 16px;
+margin:14px 0;font-size:.95rem;}
+.warn b{color:#a0303a;}
+.talk{background:var(--card);border:1px solid var(--border);border-left:5px solid var(--accent);
+border-radius:10px;padding:14px 16px;margin:14px 0;font-size:.95rem;box-shadow:var(--shadow);}
+.note{font-size:.88rem;color:var(--muted);margin:10px 2px;}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--border);
+color:var(--muted);font-size:.76rem;text-align:center;letter-spacing:.05em;}
+</style>
+</head><body><div class="wrap">
+<header class="site"><h1>👑 マダム芦屋会</h1><p>会員限定・特典ライブラリ</p></header>
+
+<h1 class="tool">🧮 金・銀 売却手取りシミュレーター</h1>
+<p class="lead">値段は毎晩見ているのに、「売ったらいくら残るか」を知らない方が多すぎますのよ。<br>
+買った値段とグラム数を入れてごらんなさい。<b>手取りと、税金ゼロで売れる量</b>まで、あなた専用の数字が出ますわ。</p>
+
+<div class="panel">
+  <label>何をお売りになるの？</label>
+  <div class="seg" id="metal">
+    <button data-m="gold" class="on">金</button>
+    <button data-m="silver">銀</button>
+  </div>
+  <label>今日の買取価格 <small>（1gあたり・円）</small></label>
+  <input type="text" id="price" inputmode="decimal">
+  <p class="now" id="priceNote">※2026年7月の目安を入れてありますわ。お使いの買取店の「本日の買取価格」に直すと正確ですのよ。</p>
+  <label>買った値段 <small>（1gあたり・円）</small></label>
+  <input type="text" id="buy" inputmode="decimal" placeholder="例: 9000">
+  <label>持っているグラム数 <small>（g）</small></label>
+  <input type="text" id="qty" inputmode="decimal" placeholder="例: 500">
+  <label>買った年 <small>（西暦・積立なら主に買っていた頃）</small></label>
+  <input type="text" id="year" inputmode="numeric" placeholder="例: 2019">
+  <div class="chk"><input type="checkbox" id="unknown"><span>買った値段がわからない（書類がない）</span></div>
+  <button class="btn" id="calc">計算しますわよ</button>
+  <p class="now">※入れた数字はあなたのスマホの中にしか残りませんの。どこにも送信しないから、ご安心なさい。</p>
+</div>
+
+<div id="result" hidden>
+<h2>いま、全部売ったら</h2>
+<div class="stat">
+  <div><span class="k">売却額</span><br><span class="v" id="s-sell">—</span></div>
+  <div><span class="k">もうけ（譲渡益）</span><br><span class="v" id="s-profit">—</span></div>
+  <div><span class="k">保有期間の扱い</span><br><span class="v" id="s-term">—</span></div>
+</div>
+<div class="stat">
+  <div><span class="k">課税される額</span><br><span class="v" id="s-taxable">—</span></div>
+  <div><span class="k">税金の目安</span><br><span class="v" id="s-tax">—</span></div>
+  <div><span class="k">手取りの目安</span><br><span class="v" id="s-net">—</span></div>
+</div>
+<p class="note" id="termNote"></p>
+<div class="warn" id="unknownWarn" hidden><b>⚠️ 「買った値段がわからない」は大損の入口ですわ。</b><br>
+書類がないと、税務上は<b>売却額の5%しか元手と認められません</b>の（残り95%が「もうけ」扱い）。
+計算はその前提でしてありますわ。<b>購入時の計算書・積立の年間報告書・通帳の引き落とし記録</b>——
+売る前に、家中を探してごらんなさい。それだけで税金が桁違いに変わりますのよ。</div>
+<div class="warn" id="alert200" hidden></div>
+
+<h2>税金ゼロで売るなら（年50万円の控除枠）</h2>
+<div class="big" id="zeroPlan"></div>
+<p class="note">金地金・銀地金のもうけ（譲渡所得）には<b>年間50万円の特別控除</b>がありますの。
+1年のもうけを50万円以内に収めれば、税金はゼロ。同じ年にゴルフ会員権など他の総合課税の譲渡益があると枠を食い合うから、そこだけ注意ですわ。</p>
+
+<div class="talk" id="advice"></div>
+</div>
+
+<h2>売る前の心得（税金の基礎・日本）</h2>
+<div class="talk">
+・<b>5年ルール</b>: 買ってから5年を超えて売ると、課税対象が<b>半分</b>になりますの。「売るなら、5年待った子から」ですわ。<br>
+・<b>年50万円の控除</b>: 1年のもうけが50万円以内なら税金ゼロ。急いで一度に売る理由、ありまして？<br>
+・<b>200万円ルール</b>: 一度に200万円を超えて売ると、買取店から税務署へ「支払調書」が行きますの（マイナンバー提出）。悪いことではなくてよ。きちんと申告していれば、何も怖くありませんわ。<br>
+・<b>消費税</b>: 個人が買取店に売るときは、買取価格に<b>消費税10%が上乗せ</b>されて戻ってきますのよ。<br>
+・お勤めの方は、給与以外の所得が年20万円以下なら所得税の確定申告は不要（住民税の申告は別途）ですわ。
+</div>
+
+<div class="talk">
+<b>💡 この道具の使い方</b><br>
+① 「いくらになったら、年に何gずつ売るか」を<b>あなたが</b>決めて、紙に書いて貼っておく。<br>
+② アタクシは「まだ売るな」と言い続けますわ。でも、いつか売るその日に慌てた人から、税金でごっそり持っていかれますの。<br>
+③ 売り時を決めるのはアタクシではなくてよ。この数字で、<b>あなたが決める</b>のですわ。
+</div>
+
+<footer>この道具は情報提供が目的で、特定商品の売買や税務判断を勧めるものではありませんわ。税額は概算（総合課税のため、あなたの他の所得で変わります）。制度は国税庁タックスアンサー No.3161・No.3252・No.3258 に基づく2026年7月時点の情報ですの。実際の申告は税務署・税理士にご確認なさい。投資判断はあなた自身の責任で。<br>
+このページはマダム芦屋会（公式LINE）の会員限定ですわ。URLの転載はなさらないでちょうだい。<br>
+<a href="index.html">← 特典ライブラリ一覧へ</a></footer>
+</div>
+<script>
+var DEF={gold:{price:23300,buyPh:"例: 9000",note:"※2026年7月の目安（金の買取おおよそ23,000円台/g）を入れてありますわ。お使いの買取店の「本日の買取価格」に直すと正確ですのよ。"},
+         silver:{price:340,buyPh:"例: 120",note:"※2026年7月の目安（銀の買取おおよそ300円台/g）を入れてありますわ。お使いの買取店の「本日の買取価格」に直すと正確ですのよ。"}};
+var metal="gold";
+
+function z2h(s){return s.replace(/[０-９．]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-0xFEE0);}).replace(/[，,、\s]/g,"");}
+function num(id){var v=parseFloat(z2h(document.getElementById(id).value||""));return isFinite(v)&&v>0?v:null;}
+function yen(n){return n>=1e8?(n/1e8).toFixed(2).replace(/\.?0+$/,"")+"億円":Math.round(n).toLocaleString("ja-JP")+"円";}
+function el(id){return document.getElementById(id);}
+
+function setMetal(m){
+ metal=m;
+ document.querySelectorAll("#metal button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-m")===m);});
+ el("price").value=DEF[m].price;
+ el("buy").placeholder=DEF[m].buyPh;
+ el("priceNote").textContent=DEF[m].note;
+ render();
+}
+
+function render(){
+ var price=num("price"),buy=num("buy"),qty=num("qty"),yr=num("year");
+ var unknown=el("unknown").checked;
+ var res=el("result");
+ if(price==null||qty==null||(!unknown&&buy==null)){res.hidden=true;return;}
+ res.hidden=false;
+
+ var sell=price*qty;
+ var cost=unknown?sell*0.05:buy*qty;
+ var profit=sell-cost;
+
+ // 保有期間（5年超で長期・課税1/2）
+ var nowY=new Date().getFullYear();
+ var isLong=false,termLabel="—",termNote="";
+ if(unknown&&yr==null){termLabel="短期扱い";termNote="買った年もわからない場合は、短期（課税半分なし）で計算してありますわ。";}
+ else if(yr==null){termLabel="短期扱い";termNote="「買った年」を入れると、5年超の優遇（課税半分）まで判定できますのよ。";}
+ else{
+  var d=nowY-yr;
+  if(d>=6){isLong=true;termLabel="長期（5年超）";termNote="5年を超えて保有していますから、課税対象は半分になりますわ。ご立派ですのよ。";}
+  else if(d===5){termLabel="境目ですわ";termNote="買った月によっては5年超（課税半分）になりますの。短期の前提で計算してあるから、購入日の書類を確かめてごらんなさい。";}
+  else{termLabel="短期（5年以内）";termNote="5年以内の売却は課税半分の優遇がありませんの。あと"+(6-d)+"年ほど待てば長期扱いですわ。";}
+ }
+
+ var taxable=0;
+ if(profit>500000){taxable=profit-500000;if(isLong)taxable=taxable/2;}
+ var taxLo=Math.round(taxable*0.15),taxHi=Math.round(taxable*0.30);
+ var netLo=sell-taxHi,netHi=sell-taxLo;
+
+ el("s-sell").textContent=yen(sell);
+ var p=el("s-profit");
+ if(profit>0){p.textContent="+"+yen(profit);p.className="v plus";}
+ else{p.textContent="−"+yen(Math.abs(profit));p.className="v minus";}
+ el("s-term").textContent=termLabel;
+ el("termNote").textContent=termNote;
+ el("s-taxable").textContent=taxable>0?yen(taxable):"0円";
+ el("s-tax").textContent=taxable>0?"約"+yen(taxLo)+"〜"+yen(taxHi):"0円 🎉";
+ el("s-net").textContent=taxable>0?"約"+yen(netLo)+"〜"+yen(netHi):yen(sell);
+ el("unknownWarn").hidden=!unknown;
+
+ // 200万円ルール
+ var a2=el("alert200");
+ if(sell>2000000){
+  var g200=Math.floor(2000000/price);
+  a2.hidden=false;
+  a2.innerHTML="<b>📋 一度に売ると支払調書が出ますわ。</b><br>全部で"+yen(sell)+"——1回の売却が200万円を超えると、買取店から税務署へ支払調書（マイナンバー付き）が提出されますの。"+
+   "悪いことではありませんのよ。ただ「知らなかった」では済まないから、<b>1回"+g200.toLocaleString("ja-JP")+"g以内</b>に分けるか、申告の備えをしてから売りなさいな。";
+ }else{a2.hidden=true;}
+
+ // 税金ゼロの梯子（年50万円枠）
+ var zp=el("zeroPlan");
+ if(profit<=0){
+  zp.innerHTML='<span class="t">いま売っても、もうけが出ませんわ</span><div class="n">税金はゼロ。でも——</div>'+
+   '<span class="s">損をしてまで売り急ぐ理由はなくってよ。値段が育ったら、また数字を入れにいらっしゃい。</span>';
+ }else if(profit<=500000){
+  zp.innerHTML='<span class="t">あなたのもうけは50万円以内ですわ</span><div class="n">全部売っても、税金ゼロ 🎉</div>'+
+   '<span class="s">年間50万円の特別控除にすっぽり収まりますの。慌てる必要は何もありませんわね。</span>';
+ }else{
+  var perG=unknown?(price*0.95):(price-buy);
+  var gZero=Math.floor(500000/perG);
+  var years=Math.ceil(qty/Math.max(gZero,1));
+  zp.innerHTML='<span class="t">税金ゼロで売れる量（1年あたり）</span>'+
+   '<div class="n">年 '+gZero.toLocaleString("ja-JP")+'g まで</div>'+
+   '<span class="s">いまの値段なら、'+years+'年に分ければ全部を税金ゼロで手放せますわ（毎年'+gZero.toLocaleString("ja-JP")+'g＝約'+yen(gZero*price)+'ずつ）。'+
+   (isLong?"":"5年超まで待てば課税半分の道もありますのよ。")+'</span>';
+ }
+
+ // ひとこと
+ var adv=el("advice");
+ if(profit>0){
+  adv.innerHTML="<b>👑 マダムのひとこと</b><br>「いくらで・年に何gずつ」——それを紙に書いて貼った方から、狼狽売りから卒業していきますのよ。"+
+   "売り時はアタクシが決めることではなくてよ。この数字で、あなたが決めるのですわ。";
+ }else{
+  adv.innerHTML="<b>👑 マダムのひとこと</b><br>含み損の夜ほど、数字は冷静に見るものですわ。いまは売る局面ではないと、数字が言っていますでしょう。"+
+   "握り続けた方が半年後に笑いますの。ホッホッホ。";
+ }
+
+ try{localStorage.setItem("kingin_sim",JSON.stringify({m:metal,p:price,b:buy,q:qty,y:yr,u:unknown}));}catch(e){}
+}
+
+document.querySelectorAll("#metal button").forEach(function(b){
+ b.addEventListener("click",function(){setMetal(b.getAttribute("data-m"));});
+});
+el("calc").addEventListener("click",render);
+["price","buy","qty","year"].forEach(function(id){el(id).addEventListener("input",render);});
+el("unknown").addEventListener("change",render);
+
+el("price").value=DEF.gold.price;
+try{var s=JSON.parse(localStorage.getItem("kingin_sim")||"null");
+ if(s){metal=s.m||"gold";
+  document.querySelectorAll("#metal button").forEach(function(b){b.classList.toggle("on",b.getAttribute("data-m")===metal);});
+  el("priceNote").textContent=DEF[metal].note;el("buy").placeholder=DEF[metal].buyPh;
+  if(s.p)el("price").value=s.p;if(s.b)el("buy").value=s.b;if(s.q)el("qty").value=s.q;if(s.y)el("year").value=s.y;
+  el("unknown").checked=!!s.u;}}catch(e){}
+render();
+</script>
+</body></html>
